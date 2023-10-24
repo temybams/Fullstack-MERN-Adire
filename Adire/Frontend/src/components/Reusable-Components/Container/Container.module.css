@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+.dashboard-body {
+  width: 82%;
+  height: 110vh;
+  background: var(--Grey-50, #f9fafb);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  flex-direction: column;
+  padding: 40px 40px;
+}

@@ -1,0 +1,103 @@
+.confirm-email-sign-up {
+  width: 100%;
+  height: 100%;
+  background: var(--Grey-100, #f2f4f7);
+}
+
+.frame-8346 {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
+}
+
+.container {
+  background: var(--white, #ffffff);
+  border-radius: 24px;
+  width: 500px;
+  padding: 48px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.mail-open-check {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+
+.svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header {
+  display: flex;
+  color: #012a4a;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font:
+    700 24px/24px 'Inter',
+    sans-serif;
+}
+
+.frame-8345 {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-8344 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.hi-there-use-the-link-below-to-verify-your-email-and-start-enjoying-adire {
+  color: var(--main-text, #101828);
+  text-align: center;
+  font: var(--button-normal-14, 400 14px/20px 'Inter', sans-serif);
+  position: relative;
+}
+.button-default {
+  background: var(--purple-700, #5925dc);
+  border-radius: 6px;
+  padding: 12px 16px 12px 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+.button-default:disabled {
+  background-color: gray;
+  color: #ffffff;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.button-default:hover {
+  opacity: 0.5;
+}
+
+.text {
+  color: var(--white, #ffffff);
+  text-align: left;
+  font: var(--body-text-bold-16, 600 16px/140% 'Inter', sans-serif);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}

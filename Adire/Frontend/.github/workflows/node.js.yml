@@ -1,0 +1,75 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: ['develop']
+  pull_request:
+    branches: ['develop']
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - run: yarn --ignore-engines --frozen-lockfile
+      - run: yarn install
+
+  build:
+    runs-on: ubuntu-latest
+    needs: install
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - run: yarn build
+      - run: yarn --ignore-engines --frozen-lockfile
+      - run: yarn test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    env:
+      VERCEL_ORG_ID: AgS8w1HwIR8suTzmEttBI6VI
+      VERCEL_PROJECT_ID: prj_3QQTmsSCKD2J2XWXlH9bTXVKQnp1
+
+    steps:
+      - name: Check if it's a merge build
+        id: merge-check
+        run: echo "::set-output name=is_merge::$(if [ $GITHUB_EVENT_NAME == 'push' ] && [ $GITHUB_REF == 'refs/heads/develop' ]; then echo true; else echo false; fi)"
+
+      - name: Deploy to Vercel
+        uses: actions/checkout@v2
+
+      - name: Install Vercel CLI
+        run: yarn global add vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=YUDRLpmS58dryYXkTD5OTjKl
+      - name: Install Project Dependencies
+        run: yarn build
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=YUDRLpmS58dryYXkTD5OTjKl
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=YUDRLpmS58dryYXkTD5OTjKl
+
+      # Check the exit code of the deployment step and fail if it's not 0
+      - name: Check deployment status
+        run: |
+          if [ $? -ne 0 ]; then
+            echo "Deployment failed."
+            exit 1
+          fi
